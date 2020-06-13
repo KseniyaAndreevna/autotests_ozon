@@ -2,7 +2,6 @@ package search;
 
 import base.BaseTests;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -45,11 +44,13 @@ public class SearchItemsTests extends BaseTests {
         //click on random brand and return it's name
         String brand = searchPage.selectRandomBrand();
 
+        //collect descriptions of items
         var searchedItems = searchPage.getSearchedItemNames();
+
+        //verify that all descriptions contain selected brand
         for (WebElement searchedItem: searchedItems){
             assertTrue(searchedItem.getText().contains("brand"));
         }
-        //searchPage.selectRandomBrand();
 
     }
 }

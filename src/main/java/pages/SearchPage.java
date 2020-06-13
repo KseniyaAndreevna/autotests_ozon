@@ -51,15 +51,19 @@ public class SearchPage {
 
     public String selectRandomBrand(){
         delay5seconds();
-        List<WebElement> brands = driver.findElements(brandNames);
-        Random rand = new Random();
-        int randomBrandNumber = rand.nextInt(brands.size()) + 1;
-
-        String locatorOfBrand = "(//div[div[contains(text(),'Бренды')]]//label//span)[" + randomBrandNumber + "]";
-        By selectedBrand = By.xpath(locatorOfBrand);
+        int randomBrandNumber = generateRandomNumberForBrand();
+        By selectedBrand = By.xpath("(//div[div[contains(text(),'Бренды')]]//label//span)[" + randomBrandNumber + "]");
         String selectedBrandName = driver.findElement(selectedBrand).getText();
         driver.findElement(selectedBrand).click();
         return selectedBrandName;
+    }
+
+
+    //takes number of available brands on the page and generates random number
+    private int generateRandomNumberForBrand(){
+        List<WebElement> brands = driver.findElements(brandNames);
+        Random rand = new Random();
+        return rand.nextInt(brands.size()) + 1;
     }
 
     private void delay5seconds(){
