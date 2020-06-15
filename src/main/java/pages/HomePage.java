@@ -11,7 +11,6 @@ public class HomePage {
     private By inputField = By.cssSelector("input[name='search']");
     private By submitSearchButton = By.cssSelector("button[type='submit']");
     private By suggestionItem = By.cssSelector(".suggestions-item.type-suggests");
-    //.suggestions-item.type-suggests
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -22,11 +21,7 @@ public class HomePage {
     }
 
     public SearchPage clickSearch() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(3);
         driver.findElement(submitSearchButton).click();
         return new SearchPage(driver);
     }
@@ -36,11 +31,7 @@ public class HomePage {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         //wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(suggestionItem)));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(suggestionItem)));
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(1);
         //click on item with text coincidental with passed text
         List<WebElement> suggestedItems = driver.findElements(suggestionItem);
 
@@ -60,6 +51,13 @@ public class HomePage {
         return new Category(driver);
     }
 
+    private void sleep(int seconds){
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

@@ -18,32 +18,28 @@ public class ProductPage {
     }
 
     public String getProductTitle(){
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(3);
         return driver.findElement(productTitle).getText();
     }
 
     public void addToChart(){
 //        WebDriverWait wait = new WebDriverWait(driver, 5);
 //        wait.until(ExpectedConditions.elementToBeClickable(addToChartButton));
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep(6);
         driver.findElement(addToChartButton).click();
     }
 
     public CartPage goToChart(){
+        sleep(6);
+        driver.findElement(goToChartButton).click();
+        return new CartPage(driver);
+    }
+
+    private void sleep(int seconds){
         try {
-            Thread.sleep(6000);
+            Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        driver.findElement(goToChartButton).click();
-        return new CartPage(driver);
     }
 }
