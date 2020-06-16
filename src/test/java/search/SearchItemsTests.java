@@ -43,10 +43,20 @@ public class SearchItemsTests extends BaseTests {
         searchPage.scrollToItems();
         //click on random brand and return it's name
         String brand = searchPage.selectRandomBrand();
+        searchPage.scrollToItems();
 
         //collect descriptions of items
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         var searchedItems = searchPage.getSearchedItemNames();
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //verify that all descriptions contain selected brand
         for (WebElement searchedItem: searchedItems){
             assertTrue(searchedItem.getText().contains("brand"));

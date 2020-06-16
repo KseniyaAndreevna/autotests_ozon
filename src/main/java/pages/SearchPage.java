@@ -15,6 +15,8 @@ public class SearchPage {
     private By searchedItemNames = By.xpath("//div/div/a[contains(@class, 'tile-hover-target')][2]");
     private By brandNames = By.xpath("//div[div[contains(text(),'Бренды')]]//label//span");
 
+    private static final int numberOfVisibleItems = 8;
+
     public SearchPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -37,6 +39,13 @@ public class SearchPage {
         return new ProductPage(driver);
     }
 
+    public String selectRandomItem(){
+        Random random = new Random();
+        int rand = random.nextInt(numberOfVisibleItems) + 1;
+        String stringXpathOfItem = "(//div/div/a[contains(@class, 'tile-hover-target')][2])[" + rand + "]";
+        By locatorOfItem = By.xpath(stringXpathOfItem);
+        return driver.findElement(locatorOfItem).getText();
+    }
 
     public String selectRandomBrand(){
         sleep(5);

@@ -23,8 +23,6 @@ public class ProductPage {
     }
 
     public void addToChart(){
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        wait.until(ExpectedConditions.elementToBeClickable(addToChartButton));
         sleep(6);
         driver.findElement(addToChartButton).click();
     }
