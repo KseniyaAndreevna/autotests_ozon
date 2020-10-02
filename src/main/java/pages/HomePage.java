@@ -21,7 +21,9 @@ public class HomePage {
     }
 
     public SearchPage clickSearch() {
-        sleep(3);
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(submitSearchButton)));
+        //sleep(3);
         driver.findElement(submitSearchButton).click();
         return new SearchPage(driver);
     }

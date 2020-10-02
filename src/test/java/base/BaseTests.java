@@ -14,6 +14,7 @@ import pages.HomePage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTests {
     private WebDriver driver;
@@ -41,6 +42,9 @@ public class BaseTests {
             var camera = (TakesScreenshot) driver;
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
             try {
+                if (!new File("resources/screenshots").exists()) {
+                    new File("resources/screenshots").mkdirs();
+                }
                 Files.move(screenshot, new File("resources/screenshots/" + result.getName() +".png"));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -53,5 +57,12 @@ public class BaseTests {
         driver.quit();
     }
 
+    protected static void sleep(int seconds) {
+        try {
+            Thread.sleep(TimeUnit.SECONDS.toMillis(seconds));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 

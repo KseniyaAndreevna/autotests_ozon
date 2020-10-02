@@ -13,11 +13,19 @@ public class SearchItemsTests extends BaseTests {
     @Test
     //test that result of search matches entered search request
     public void testSuccessfulSearch(){
-        homePage.enterSearchParameter("самокат");
+        homePage.enterSearchParameter("ложка");
+        System.out.println("enterSearchParameter");
         var searchPage = homePage.clickSearch();
+        System.out.println("clickSearch");
+        searchPage.scrollToItems();
+        System.out.println("scrollToItems");
         var searchedItems = searchPage.getSearchedItemNames();
+        System.out.println("getSearchedItemNames");
+        System.out.println("searchedItems = " + searchedItems);
+        assertFalse(searchedItems.isEmpty());
         for (WebElement searchedItem: searchedItems){
             assertTrue(searchedItem.getText().matches("^Самокат"));
+            System.out.println("matches");
         }
 
     }
@@ -53,7 +61,7 @@ public class SearchItemsTests extends BaseTests {
         }
         var searchedItems = searchPage.getSearchedItemNames();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

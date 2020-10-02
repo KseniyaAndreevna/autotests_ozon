@@ -5,15 +5,18 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class SearchPage {
     private WebDriver driver;
     private By searchedItemNames = By.xpath("//div/div/a[contains(@class, 'tile-hover-target')][2]");
     private By brandNames = By.xpath("//div[div[contains(text(),'Бренды')]]//label//span");
+    private By blockOfItems = By.xpath("//div[@data-widget='megaPaginator']");
 
     private static final int numberOfVisibleItems = 8;
 
@@ -28,8 +31,9 @@ public class SearchPage {
 
     public void scrollToItems(){
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-widget='megaPaginator']")));
-        WebElement itemsSectionElement = driver.findElement(By.xpath("//div[@data-widget='megaPaginator']"));
+        //checked presence of block with founded items
+        wait.until(ExpectedConditions.presenceOfElementLocated(blockOfItems));
+        WebElement itemsSectionElement = driver.findElement(blockOfItems);
         String script = "arguments[0].scrollIntoView();";
         ((JavascriptExecutor)driver).executeScript(script, itemsSectionElement);
     }
