@@ -12,6 +12,7 @@ public class ProductPage {
     private By productTitle = By.xpath("//div[@data-widget='webProductHeading']/h1");
     private By addToChartButton = By.xpath("(//div[text()='Добавить в корзину'])[1]");
     private By goToChartButton = By.xpath("//div[text()='Перейти']");
+    private By targetAuditoryDescription = By.xpath("//dl[dt/span[contains(text(),'Целевая аудитория')]]/dd");
 
     public ProductPage(WebDriver driver) {
         this.driver = driver;
@@ -20,6 +21,13 @@ public class ProductPage {
     public String getProductTitle(){
         sleep(3);
         return driver.findElement(productTitle).getText();
+    }
+
+    public String getTargetAuditory(){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(targetAuditoryDescription));
+        System.out.println("getTargetAuditory");
+        return driver.findElement(targetAuditoryDescription).getText();
     }
 
     public void addToChart(){

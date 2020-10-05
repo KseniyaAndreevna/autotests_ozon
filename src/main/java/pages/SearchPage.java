@@ -26,6 +26,8 @@ public class SearchPage {
 
     public List<WebElement> getSearchedItemNames(){
         List<WebElement> itemDescription = driver.findElements(searchedItemNames);
+        System.out.println("getSearchedItemNames");
+        //System.out.println("searchedItems = " + searchedItems);
         return itemDescription;
     }
 
@@ -36,6 +38,7 @@ public class SearchPage {
         WebElement itemsSectionElement = driver.findElement(blockOfItems);
         String script = "arguments[0].scrollIntoView();";
         ((JavascriptExecutor)driver).executeScript(script, itemsSectionElement);
+        System.out.println("scrollToItems");
     }
 
     public ProductPage clickItem(String text){
@@ -43,13 +46,26 @@ public class SearchPage {
         return new ProductPage(driver);
     }
 
-    public String selectRandomItem(){
+    public ProductPage clickRandomItem(){
+        Random random = new Random();
+        int rand = random.nextInt(numberOfVisibleItems) + 1;
+        String stringXpathOfItem = "(//div/div/a[contains(@class, 'tile-hover-target')][2])[" + rand + "]";
+        By locatorOfItem = By.xpath(stringXpathOfItem);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(locatorOfItem));
+        driver.findElement(locatorOfItem).click();
+        System.out.println("clickRandomItem");
+        return new ProductPage(driver);
+    }
+
+    public String getRandomItemText(){
         Random random = new Random();
         int rand = random.nextInt(numberOfVisibleItems) + 1;
         String stringXpathOfItem = "(//div/div/a[contains(@class, 'tile-hover-target')][2])[" + rand + "]";
         By locatorOfItem = By.xpath(stringXpathOfItem);
         return driver.findElement(locatorOfItem).getText();
     }
+
 
     public String selectRandomBrand(){
         sleep(5);

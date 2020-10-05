@@ -3,6 +3,7 @@ package search;
 import base.BaseTests;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+import pages.Category;
 
 import java.util.List;
 
@@ -14,14 +15,9 @@ public class SearchItemsTests extends BaseTests {
     //test that result of search matches entered search request
     public void testSuccessfulSearch(){
         homePage.enterSearchParameter("ложка");
-        System.out.println("enterSearchParameter");
         var searchPage = homePage.clickSearch();
-        System.out.println("clickSearch");
         searchPage.scrollToItems();
-        System.out.println("scrollToItems");
         var searchedItems = searchPage.getSearchedItemNames();
-        System.out.println("getSearchedItemNames");
-        System.out.println("searchedItems = " + searchedItems);
         assertFalse(searchedItems.isEmpty());
         for (WebElement searchedItem: searchedItems){
             assertTrue(searchedItem.getText().matches("^Самокат"));
@@ -34,15 +30,13 @@ public class SearchItemsTests extends BaseTests {
     //test that result of search matches search request selected from dropdown
     public void testSuccessfulSearchFromDropdown(){
         homePage.enterSearchParameter("самокат");
-
-        List<WebElement> descriptions = homePage.clickSuggestedItemContained("для взрослых")
-                                                .getTextDescription();
-
-        for (WebElement description: descriptions){
-            assertTrue(description.getText().contains("Целевая аудитория: Взрослая"));
-        }
-
+        var searchPage = homePage.clickSuggestedItemContained("для взрослых");
+        searchPage.scrollToItems();
+        var productPage = searchPage.clickRandomItem();
+        String targetAuditory = productPage.getTargetAuditory();
+        assertEquals(targetAuditory, "Взрослая");
     }
+
     @Test
     //test result of search with filter by the brand
     public void testSuccessfulSelectionOfBrand(){

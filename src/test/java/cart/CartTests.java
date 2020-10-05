@@ -13,7 +13,7 @@ public class CartTests extends BaseTests {
         var searchPage = homePage.clickSearch();
         searchPage.scrollToItems();
         //var productPage = searchPage.clickItem("Самокат Roces");
-        var productPage = searchPage.clickItem(searchPage.selectRandomItem());
+        var productPage = searchPage.clickItem(searchPage.getRandomItemText());
         String itemName = productPage.getProductTitle();
         productPage.addToChart();
         var cartPage = productPage.goToChart();
