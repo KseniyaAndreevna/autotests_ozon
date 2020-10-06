@@ -14,6 +14,7 @@ public class HomePage {
     private By inputField = By.cssSelector("input[name='search']");
     private By submitSearchButton = By.cssSelector("button[type='submit']");
     //private By suggestionItem = By.cssSelector(".suggestions-item.type-suggests");
+    private By searchSuggestions = By.cssSelector("section[data-widget='searchSuggestions']");
     private By suggestionItem = By.cssSelector("a[href*='/search/?']");
 
     public HomePage(WebDriver driver) {
@@ -47,6 +48,7 @@ public class HomePage {
         });
         thread.start();
         WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(searchSuggestions));
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(suggestionItem)));
         //wait.until(ExpectedConditions.visibilityOf(driver.findElement(suggestionItem)));
         //sleep(1);

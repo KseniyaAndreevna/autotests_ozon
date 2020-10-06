@@ -7,6 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+/*
+это подключение для Selenide, экспериментальное
+ */
+
 
 import java.util.List;
 import java.util.Random;
