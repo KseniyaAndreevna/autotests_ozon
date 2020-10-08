@@ -21,6 +21,7 @@ public class SearchPage {
     private By searchedItemNames = By.xpath("//div/div/a[contains(@class, 'tile-hover-target')][2]");
     private By brandNames = By.xpath("//div[div[contains(text(),'Бренды')]]//label//span");
     private By blockOfItems = By.xpath("//div[@data-widget='megaPaginator']");
+    private By labelOfBrands = By.xpath("//span[contains(text(),'Бренды')]");
 
     private static final int numberOfVisibleItems = 8;
 
@@ -77,9 +78,16 @@ public class SearchPage {
         By selectedBrand = By.xpath("(//div[div[contains(text(),'Бренды')]]//label//span)[" + randomBrandNumber + "]");
         String selectedBrandName = driver.findElement(selectedBrand).getText();
         driver.findElement(selectedBrand).click();
+        System.out.println("selectRandomBrand");
         return selectedBrandName;
     }
 
+    public void waitForPageUpdating(){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(labelOfBrands));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(labelOfBrands)));
+        System.out.println("waitForPageUpdating");
+    }
 
     //takes number of available brands on the page and generates random number
     private int generateRandomNumberForBrand(){

@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
-public class MaksTest {
+public class MasTest {
 
     private static List<String> emptyList = Collections.emptyList();
 
@@ -19,5 +21,14 @@ public class MaksTest {
     @Test
     public void test2() {
         Assert.assertFalse(emptyList.isEmpty());
+    }
+
+    @Test
+    public void testTest(){
+        String text1 = "RIDEX";
+        String text2 = "Ridex";
+        //assertTrue(text1.contains("RIDEX"));
+        //assertTrue(text2.contains("RIDEX"));
+        assertEquals(text1, "Ridex");
     }
 }

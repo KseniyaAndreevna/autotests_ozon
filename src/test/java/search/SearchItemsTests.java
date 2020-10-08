@@ -20,6 +20,7 @@ public class SearchItemsTests extends BaseTests {
         var searchedItems = searchPage.getSearchedItemNames();
         assertFalse(searchedItems.isEmpty());
         for (WebElement searchedItem: searchedItems){
+            System.out.println("searchedItem" + searchedItem.getText());
             assertTrue(searchedItem.getText().matches("^Самокат"));
             System.out.println("matches");
         }
@@ -44,25 +45,17 @@ public class SearchItemsTests extends BaseTests {
         var searchPage = homePage.clickSearch();
         searchPage.scrollToItems();
         //click on random brand and return it's name
-        String brand = searchPage.selectRandomBrand();
-        searchPage.scrollToItems();
-
+        String brand = searchPage.selectRandomBrand().toLowerCase();
+        System.out.println("Brand is: " + brand);
+        searchPage.waitForPageUpdating();
         //collect descriptions of items
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         var searchedItems = searchPage.getSearchedItemNames();
-        try {
-            Thread.sleep(6000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println("size is " + searchedItems.size());
         //verify that all descriptions contain selected brand
         for (WebElement searchedItem: searchedItems){
-            assertTrue(searchedItem.getText().contains("brand"));
+            assertTrue(searchedItem.getText().toLowerCase().contains(brand), "Text is: " + searchedItem.getText().toLowerCase());
         }
 
     }
+
 }
