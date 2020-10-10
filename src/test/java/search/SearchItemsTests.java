@@ -3,9 +3,6 @@ package search;
 import base.BaseTests;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-import pages.Category;
-
-import java.util.List;
 
 import static org.testng.Assert.*;
 
