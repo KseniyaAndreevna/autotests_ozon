@@ -14,15 +14,15 @@ public class SearchItemsTests extends BaseTests {
     @Test
     //test that result of search matches entered search request
     public void testSuccessfulSearch(){
-        homePage.enterSearchParameter("ложка");
+        String searchItem = "самокат";
+        homePage.enterSearchParameter(searchItem);
         var searchPage = homePage.clickSearch();
         searchPage.scrollToItems();
         var searchedItems = searchPage.getSearchedItemNames();
         assertFalse(searchedItems.isEmpty());
         for (WebElement searchedItem: searchedItems){
-            System.out.println("searchedItem" + searchedItem.getText());
-            assertTrue(searchedItem.getText().matches("^Самокат"));
-            System.out.println("matches");
+            assertTrue(searchedItem.getText().toLowerCase().contains(searchItem),
+                    "Item that does not contain \"" + searchItem + "\" in it's name was found: " + searchedItem.getText() + " /");
         }
 
     }
@@ -35,7 +35,7 @@ public class SearchItemsTests extends BaseTests {
         searchPage.scrollToItems();
         var productPage = searchPage.clickRandomItem();
         String targetAuditory = productPage.getTargetAuditory();
-        assertEquals(targetAuditory, "Взрослая");
+        assertEquals(targetAuditory, "Взрослая", "Target auditory is not " + "Взрослая /");
     }
 
     @Test
@@ -44,16 +44,14 @@ public class SearchItemsTests extends BaseTests {
         homePage.enterSearchParameter("самокат");
         var searchPage = homePage.clickSearch();
         searchPage.scrollToItems();
-        //click on random brand and return it's name
         String brand = searchPage.selectRandomBrand().toLowerCase();
         System.out.println("Brand is: " + brand);
         searchPage.waitForPageUpdating();
-        //collect descriptions of items
         var searchedItems = searchPage.getSearchedItemNames();
-        System.out.println("size is " + searchedItems.size());
         //verify that all descriptions contain selected brand
         for (WebElement searchedItem: searchedItems){
-            assertTrue(searchedItem.getText().toLowerCase().contains(brand), "Text is: " + searchedItem.getText().toLowerCase());
+            assertTrue(searchedItem.getText().toLowerCase().contains(brand),
+                    "No brand \"" + brand + "\" was found in text [" + searchedItem.getText().toLowerCase() + "]/");
         }
 
     }

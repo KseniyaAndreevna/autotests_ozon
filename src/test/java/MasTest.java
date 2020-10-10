@@ -29,6 +29,8 @@ public class MasTest {
         String text2 = "Ridex";
         //assertTrue(text1.contains("RIDEX"));
         //assertTrue(text2.contains("RIDEX"));
-        assertEquals(text1, "Ridex");
+        //assertEquals(text1, "Ridex");
+        String item = "самокат teach team sensei, черный";
+        assertTrue(item.contains("tech team"));
     }
 }
