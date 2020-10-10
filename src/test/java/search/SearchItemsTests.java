@@ -8,25 +8,25 @@ import static org.testng.Assert.*;
 
 public class SearchItemsTests extends BaseTests {
 
-    @Test
     //test that result of search matches entered search request
-    public void testSuccessfulSearch(){
+    @Test
+    public void testSuccessfulSearch() {
         String searchItem = "самокат";
         homePage.enterSearchParameter(searchItem);
         var searchPage = homePage.clickSearch();
         searchPage.scrollToItems();
         var searchedItems = searchPage.getSearchedItemNames();
         assertFalse(searchedItems.isEmpty());
-        for (WebElement searchedItem: searchedItems){
+        for (WebElement searchedItem: searchedItems) {
             assertTrue(searchedItem.getText().toLowerCase().contains(searchItem),
                     "Item that does not contain \"" + searchItem + "\" in it's name was found: " + searchedItem.getText() + " /");
         }
 
     }
 
-    @Test
     //test that result of search matches search request selected from dropdown
-    public void testSuccessfulSearchFromDropdown(){
+    @Test
+    public void testSuccessfulSearchFromDropdown() {
         homePage.enterSearchParameter("самокат");
         var searchPage = homePage.clickSuggestedItemContained("для взрослых");
         searchPage.scrollToItems();
@@ -35,9 +35,9 @@ public class SearchItemsTests extends BaseTests {
         assertEquals(targetAuditory, "Взрослая", "Target auditory is not " + "Взрослая /");
     }
 
+    //test that result of search matches with filter by the brand
     @Test
-    //test result of search with filter by the brand
-    public void testSuccessfulSelectionOfBrand(){
+    public void testSuccessfulSelectionOfBrand() {
         homePage.enterSearchParameter("самокат");
         var searchPage = homePage.clickSearch();
         searchPage.scrollToItems();
@@ -46,11 +46,9 @@ public class SearchItemsTests extends BaseTests {
         searchPage.waitForPageUpdating();
         var searchedItems = searchPage.getSearchedItemNames();
         //verify that all descriptions contain selected brand
-        for (WebElement searchedItem: searchedItems){
+        for (WebElement searchedItem: searchedItems) {
             assertTrue(searchedItem.getText().toLowerCase().contains(brand),
                     "No brand \"" + brand + "\" was found in text [" + searchedItem.getText().toLowerCase() + "]/");
         }
-
     }
-
 }

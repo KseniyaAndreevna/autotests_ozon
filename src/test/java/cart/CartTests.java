@@ -7,8 +7,9 @@ import static org.testng.Assert.*;
 
 public class CartTests extends BaseTests {
 
+    //test that in cart actually added chosen item
     @Test
-    public void testAddingToCart(){
+    public void testAddingToCart() {
         homePage.enterSearchParameter("самокат");
         var searchPage = homePage.clickSearch();
         searchPage.scrollToItems();
@@ -16,8 +17,7 @@ public class CartTests extends BaseTests {
         String itemName = productPage.getProductTitle();
         productPage.addToChart();
         var cartPage = productPage.goToChart();
-
-        assertEquals(itemName,cartPage.getItemDescription());
-
+        String itemDescription = cartPage.getItemDescription();
+        assertEquals(itemName, itemDescription);
     }
 }

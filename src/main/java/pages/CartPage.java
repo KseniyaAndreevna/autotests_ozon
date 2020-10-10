@@ -2,6 +2,9 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartPage {
     private WebDriver driver;
@@ -11,16 +14,10 @@ public class CartPage {
         this.driver = driver;
     }
 
-    public String getItemDescription(){
-        sleep(5);
+    public String getItemDescription() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(itemDescription));
+        System.out.println("getItemDescription");
         return driver.findElement(itemDescription).getText();
-    }
-
-    private void sleep(int seconds){
-        try {
-            Thread.sleep(seconds * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -5,16 +5,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-/*
-это подключение для Selenide, экспериментальное
- */
-
-
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class SearchPage {
     private WebDriver driver;
@@ -29,14 +22,13 @@ public class SearchPage {
         this.driver = driver;
     }
 
-    public List<WebElement> getSearchedItemNames(){
+    public List<WebElement> getSearchedItemNames() {
         List<WebElement> itemDescription = driver.findElements(searchedItemNames);
         System.out.println("getSearchedItemNames");
-        //System.out.println("searchedItems = " + searchedItems);
         return itemDescription;
     }
 
-    public void scrollToItems(){
+    public void scrollToItems() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         //checked presence of block with founded items
         wait.until(ExpectedConditions.presenceOfElementLocated(blockOfItems));
@@ -46,12 +38,13 @@ public class SearchPage {
         System.out.println("scrollToItems");
     }
 
-    public ProductPage clickItem(String text){
+    public ProductPage clickItem(String text) {
         driver.findElement(By.partialLinkText(text)).click();
+        System.out.println("clickItem " + text);
         return new ProductPage(driver);
     }
 
-    public ProductPage clickRandomItem(){
+    public ProductPage clickRandomItem() {
         Random random = new Random();
         int rand = random.nextInt(numberOfVisibleItems) + 1;
         String stringXpathOfItem = "(//div/div/a[contains(@class, 'tile-hover-target')][2])[" + rand + "]";
@@ -63,7 +56,7 @@ public class SearchPage {
         return new ProductPage(driver);
     }
 
-    public String getRandomItemText(){
+    public String getRandomItemText() {
         Random random = new Random();
         int rand = random.nextInt(numberOfVisibleItems) + 1;
         String stringXpathOfItem = "(//div/div/a[contains(@class, 'tile-hover-target')][2])[" + rand + "]";
@@ -71,18 +64,19 @@ public class SearchPage {
         return driver.findElement(locatorOfItem).getText();
     }
 
-
-    public String selectRandomBrand(){
-        sleep(5);
+    public String selectRandomBrand() {
         int randomBrandNumber = generateRandomNumberForBrand();
-        By selectedBrand = By.xpath("(//div[div[contains(text(),'Бренды')]]//label//span)[" + randomBrandNumber + "]");
+        String xpathBrand = "(//div[div[contains(text(),'Бренды')]]//label//span)[" + randomBrandNumber + "]";
+        By selectedBrand = By.xpath(xpathBrand);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(selectedBrand));
         String selectedBrandName = driver.findElement(selectedBrand).getText();
         driver.findElement(selectedBrand).click();
         System.out.println("selectRandomBrand");
         return selectedBrandName;
     }
 
-    public void waitForPageUpdating(){
+    public void waitForPageUpdating() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(labelOfBrands));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(labelOfBrands)));
@@ -90,17 +84,9 @@ public class SearchPage {
     }
 
     //takes number of available brands on the page and generates random number
-    private int generateRandomNumberForBrand(){
+    private int generateRandomNumberForBrand() {
         List<WebElement> brands = driver.findElements(brandNames);
         Random rand = new Random();
         return rand.nextInt(brands.size()) + 1;
-    }
-
-    private void sleep(int seconds){
-        try {
-            Thread.sleep(seconds * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
