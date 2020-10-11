@@ -22,3 +22,6 @@ download chromedriver.zip, remember its location on computer, need to move it fu
 4) Create new directory 'resources'
 ![Screenshot_1](https://user-images.githubusercontent.com/7643290/95678519-612b7e00-0bf7-11eb-80d2-e96e4060432f.png)
 5) Put chromedriver.zip file from the first step in 'resources' directory
+**Well done! Project are ready to launch!**
+
+![homer](https://user-images.githubusercontent.com/7643290/95678660-355cc800-0bf8-11eb-8a9f-36a9143f733d.jpg)
