@@ -1,5 +1,6 @@
 # autotests_ozon
 Demo project with auto tests for ozon.ru
+You can find test cases that have been automated in this file: [Ozon test cases.pdf](https://github.com/KseniyaAndreevna/autotests_ozon/files/5361065/Ozon.test.cases.pdf)
 
 <b>Components and versions used in the project:</b>
 * Java 13
