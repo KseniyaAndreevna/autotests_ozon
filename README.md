@@ -1,5 +1,6 @@
 # autotests_ozon
 Demo project with auto tests for ozon.ru
+
 You can find test cases that have been automated in this file: [Ozon test cases.pdf](https://github.com/KseniyaAndreevna/autotests_ozon/files/5361065/Ozon.test.cases.pdf)
 
 <b>Components and versions used in the project:</b>
@@ -29,3 +30,7 @@ download chromedriver.zip, remember its location on computer, need to move it fu
 **Well done! Project are ready to launch!**
 
 ![homer](https://user-images.githubusercontent.com/7643290/95678660-355cc800-0bf8-11eb-8a9f-36a9143f733d.jpg)
+
+Automated tests are plased in 'cart' and 'search' packages
+
+![Screenshot_2](https://user-images.githubusercontent.com/7643290/95678976-270fab80-0bfa-11eb-8c02-36bb52498b76.png)
