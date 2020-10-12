@@ -31,6 +31,6 @@ download chromedriver.zip, remember its location on computer, need to move it fu
 
 ![homer](https://user-images.githubusercontent.com/7643290/95678660-355cc800-0bf8-11eb-8a9f-36a9143f733d.jpg)
 
-Automated tests are plased in 'cart' and 'search' packages
+Automated tests are placed in 'cart' and 'search' packages
 
 ![Screenshot_2](https://user-images.githubusercontent.com/7643290/95678976-270fab80-0bfa-11eb-8c02-36bb52498b76.png)
